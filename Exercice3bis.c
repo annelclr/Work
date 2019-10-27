@@ -142,7 +142,7 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
                 }
                 j++;
             }  while (caractereActuel!='}');
-            j+=2;
+            j++;
             caractereActuel = elim[j];
             strcpy(restaurants[i].specialite,inter5);
             i++;
