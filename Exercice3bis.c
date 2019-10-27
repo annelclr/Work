@@ -28,10 +28,17 @@ int test(char *chemin, Restaurant restaurants[]){
 }
 
 int lire_restaurant(char *chemin, Restaurant restaurants[]);
-
+void inserer_restaurant(Restaurant restaurant);
 int main(){
     Restaurant restaurants[TAILLE_MAX];
     char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
+    Restaurant test;
+    strcpy(test.nom_restaurant,"Le test de Paris");
+    strcpy(test.adresse_restaurant,"8 rue du faubourg saint-Honoré");
+    test.positionx=atof("12.342");
+    test.positiony=atof("24");
+    strcpy(test.specialite,"Fastfood - ice cream");
+    inserer_restaurant(test);
     int nombre_restau=lire_restaurant(chemin, restaurants);
     int i=0;
     while(i<nombre_restau){
@@ -50,10 +57,39 @@ int main(){
     }
 }
 
+void inserer_restaurant(Restaurant restaurant){
+
+
+char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
+FILE* fichier = NULL;
+fichier=fopen( chemin, "a");
+if (fichier != NULL)
+{
+    fputs(restaurant.nom_restaurant, fichier);
+    fputc(';', fichier);
+    fputc(' ', fichier);
+    fputs(restaurant.adresse_restaurant, fichier);
+    fputs(";(x=",fichier);
+    char array[10];
+    sprintf(array, "%f", restaurant.positionx);
+    fputs(array, fichier);
+    fputs(", y=",fichier);
+    sprintf(array, "%f", restaurant.positiony);
+    fputs(array, fichier);
+    fputs("); {",fichier);
+    fputs(restaurant.specialite, fichier);
+    fputs("};",fichier);
+    
+    
+    fclose(fichier);
+}
+}
+
 
 int lire_restaurant(char *chemin, Restaurant restaurants[]){
     FILE* fichier=NULL;
     char caractereActuel;
+    char findefichier;
     int compteur=0;
     fichier = fopen(chemin, "r");
     printf("Liste des restaurants :");
@@ -64,8 +100,7 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
         fgets(elim1, TAILLE_MAX, fichier);
         fgets(elim1, TAILLE_MAX, fichier);
          int i=0;
-        while (compteur<21){
-           
+        while (compteur<22){
             char elim[TAILLE_MAX] = "";
         fgets(elim1, TAILLE_MAX, fichier);
         fgets(elim, TAILLE_MAX, fichier);
@@ -144,6 +179,7 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
             }  while (caractereActuel!='}');
             j++;
             caractereActuel = elim[j];
+            printf("%c\n",caractereActuel);
             strcpy(restaurants[i].specialite,inter5);
             i++;
             compteur++;
