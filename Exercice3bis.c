@@ -26,27 +26,46 @@ int test(char *chemin, Restaurant restaurants[]){
     
     return 1;
 }
+
 int lire_restaurant(char *chemin, Restaurant restaurants[]);
 
 int main(){
     Restaurant restaurants[TAILLE_MAX];
     char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
-    lire_restaurant(chemin, restaurants);
+    int nombre_restau=lire_restaurant(chemin, restaurants);
+    int i=0;
+    while(i<nombre_restau){
+        printf("\n");
+        printf("\n");
+        printf("%s\n", restaurants[i].nom_restaurant);
+        printf("\n");
+        printf("%s\n", restaurants[i].adresse_restaurant);
+        printf("\n");
+        printf("%fl\n", restaurants[i].positionx);
+        printf("\n");
+        printf("%fl\n", restaurants[i].positiony);
+        printf("\n");
+        printf("%s\n", restaurants[i].specialite);
+        i++;
+    }
 }
+
+
 int lire_restaurant(char *chemin, Restaurant restaurants[]){
     FILE* fichier=NULL;
     char caractereActuel;
     int compteur=0;
     fichier = fopen(chemin, "r");
+    printf("Liste des restaurants :");
+    
     if (fichier!=NULL){
-        
-        
         char elim1[TAILLE_MAX] = "";
         int j, k;
         fgets(elim1, TAILLE_MAX, fichier);
         fgets(elim1, TAILLE_MAX, fichier);
-        do {
-            int i=0;
+         int i=0;
+        while (compteur<21){
+           
             char elim[TAILLE_MAX] = "";
         fgets(elim1, TAILLE_MAX, fichier);
         fgets(elim, TAILLE_MAX, fichier);
@@ -62,8 +81,6 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
                 j++;
             }  while (caractereActuel!=';');
             strcpy(restaurants[i].nom_restaurant,inter);
-            printf("\n");
-            printf("%s\n", restaurants[i].nom_restaurant);
             j+=1;
             char inter2[100]="";
             k=0;
@@ -76,9 +93,6 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
                 j++;
             }  while (caractereActuel!=';');
             strcpy(restaurants[i].adresse_restaurant,inter2);
-            printf("\n");
-            printf("%s\n", restaurants[i].adresse_restaurant);
-            
             char inter3[100]="";
             j+=1;
             k=0;
@@ -97,8 +111,6 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
                 j++;
             }  while (caractereActuel!=',');
             restaurants[i].positionx=atof(inter3);
-            printf("\n");
-            printf("%fl\n", restaurants[i].positionx);
             
             char inter4[100]="";
             j+=1;
@@ -118,9 +130,6 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
                 j++;
             }  while (caractereActuel!=')');
             restaurants[i].positiony=atof(inter4);
-            printf("\n");
-            printf("%fl\n", restaurants[i].positiony);
-            
             char inter5[100]="";
             j+=3;
             k=0;
@@ -136,14 +145,11 @@ int lire_restaurant(char *chemin, Restaurant restaurants[]){
             j+=2;
             caractereActuel = elim[j];
             strcpy(restaurants[i].specialite,inter5);
-            printf("\n");
-            printf("%s\n", restaurants[i].specialite);
             i++;
             compteur++;
-            printf("\n");
-    }while (compteur<21) ;
     }
-    
+    }
     fclose(fichier);
-    return 1;
+    return compteur;
 }
+
