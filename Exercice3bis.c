@@ -1,3 +1,11 @@
+
+//
+//  Exercice3bis.c
+//  Devoir SR01
+//
+//  Created by Martin Boyer on 24/10/2019.
+//
+
 #include "Exercice3bis.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -30,6 +38,8 @@ int test(char *chemin, Restaurant restaurants[]){
 void cherche_restaurant(double x, double y, double rayon_recherche, Restaurant results[]);
 int lire_restaurant(char *chemin, Restaurant restaurants[]);
 void inserer_restaurant(Restaurant restaurant);
+void cherche_par_specialite(double x, double y, char * specialite[], Restaurant results[]);
+
 int main(){
     Restaurant restaurants[TAILLE_MAX];
     char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
@@ -57,8 +67,32 @@ int main(){
         i++;
     }
     Restaurant results[TAILLE_MAX];
-    cherche_restaurant(4,2,30,results);
+    char *s1 = "rotisserie";
+    char * specialite[10];
+    specialite[0]=s1;
+    cherche_par_specialite(1,1, specialite, results);
+   // cherche_restaurant(4,2,30,results);
 }
+
+void cherche_par_specialite(double x, double y, char * specialite[], Restaurant results[]){
+    Restaurant restaurants[TAILLE_MAX];
+    char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
+    int nombre_restau=lire_restaurant(chemin, restaurants);
+    int k=0, i=0, p=0;
+        for (i=0; i<nombre_restau;i++){
+            k=0;
+            while (specialite[k]){
+            char *chaine = restaurants[i].specialite;
+                if(strstr(chaine, specialite[k]) != NULL) {
+            results[p]=restaurants[i];
+            printf("%s\n", results[p].nom_restaurant);
+            p++;
+        }
+           k++;
+        }
+    }
+}
+        
 
 void cherche_restaurant(double x, double y, double rayon_recherche, Restaurant results[]){
    Restaurant restaurants[TAILLE_MAX];
