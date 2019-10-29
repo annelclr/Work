@@ -35,10 +35,13 @@ int test(char *chemin, Restaurant restaurants[]){
     
     return 1;
 }
-void cherche_restaurant(double x, double y, double rayon_recherche, Restaurant results[]);
+
+//je mets les déclarations dans le header
+/*void cherche_restaurant(double x, double y, double rayon_recherche, Restaurant results[]);
 int lire_restaurant(char *chemin, Restaurant restaurants[]);
 void inserer_restaurant(Restaurant restaurant);
 void cherche_par_specialite(double x, double y, char * specialite[], Restaurant results[]);
+*/
 
 int main(){
     Restaurant restaurants[TAILLE_MAX];
@@ -74,6 +77,16 @@ int main(){
    // cherche_restaurant(4,2,30,results);
 }
 
+//NOUVELLE FONCTION
+void print_result(Restaurant results[]){
+    int i;
+    int nombre_restau=lire_restaurant(chemin, restaurants);
+    
+    for(i=0; i<nombre_restau; i++){
+        
+        printf("%s ; %s ; (x=%lf, y=%lf) ; {%s} \n\n", result[i].nom_restaurant, result[i].adresse_restaurant, result[i].positionx, result[i].positiony, result[i].specialite);
+    }
+      
 void cherche_par_specialite(double x, double y, char * specialite[], Restaurant results[]){
     Restaurant restaurants[TAILLE_MAX];
     char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
@@ -85,12 +98,13 @@ void cherche_par_specialite(double x, double y, char * specialite[], Restaurant 
             char *chaine = restaurants[i].specialite;
                 if(strstr(chaine, specialite[k]) != NULL) {
             results[p]=restaurants[i];
-            printf("%s\n", results[p].nom_restaurant);
+            printf("%s\n", results[p].nom_restaurant); //pourquoi afficher seulement les noms? je mets la fonction print_result après, vois ce que tu préfères
             p++;
         }
            k++;
         }
     }
+    print_result(results);
 }
         
 
@@ -107,7 +121,11 @@ void cherche_restaurant(double x, double y, double rayon_recherche, Restaurant r
             k++;
             }
         }
+    //il faudrait afficher results mais il s'agit d'une structure restaurant donc on doit rajouter une fonction print_result
+   print_result(results);
 }
+
+
 
 void inserer_restaurant(Restaurant restaurant){
 
