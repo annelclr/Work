@@ -8,17 +8,19 @@
 #include <math.h>
 
 int main(){
-    char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
+    char *chemin = malloc(0);//"/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
     Restaurant restaurant;
     Restaurant restaurants[TAILLE_MAX];
     int testing, choix, quit=0, choix_spec=1;
     double x, y, rayon_recherche;
 
+    printf("Dans quel fichier se trouvent les restaurants que vous souhaitez consulter? (chemin absolu attendu svp)\n\n");
+    scanf("%s", chemin);
     
-    if (testing==1){
+    /*if (testing==1){
         printf("Veuillez nous excuser mais notre service est indisponible pour le moment\n\n\n");
         quit=1;
-    }
+    }*/
     
     while (quit==0){
         printf("Quelle opération souhaitez-vous réaliser?\n\n\n 1. Obtenir le nombre de restaurants disponibles\n\n 2. Ajouter un restaurant à notre base de données\n\n 3. Chercher un restaurant proche de votre localisation\n\n 4. Chercher un restaurant proposant une spécialité particulière\n\n 5. Quitter\n\n");
@@ -96,7 +98,7 @@ int main(){
             default: break;
         }
     }
-
+    free(chemin);
     return 0;
 }
 
