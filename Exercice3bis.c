@@ -1,11 +1,4 @@
 
-//
-//  Exercice3bis.c
-//  Devoir SR01
-//
-//  Created by Martin Boyer on 24/10/2019.
-//
-
 #include "Exercice3bis.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -49,7 +42,7 @@ int main(){
     test.positionx=atof("12.342");
     test.positiony=atof("24");
     strcpy(test.specialite,"Fastfood - ice cream");
-   //inserer_restaurant(test);
+   inserer_restaurant(test);
     int nombre_restau=lire_restaurant(chemin, restaurants);
     int i=0;
     while(i<nombre_restau){
@@ -67,9 +60,11 @@ int main(){
         i++;
     }
     Restaurant results[TAILLE_MAX];
-    char *s1 = "rotisserie";
+    char *s1 = "Viande";
+    char *s2 = "rotisserie";
     char * specialite[10];
     specialite[0]=s1;
+     specialite[1]=s2;
     cherche_par_specialite(1,1, specialite, results);
    // cherche_restaurant(4,2,30,results);
 }
@@ -84,9 +79,17 @@ void cherche_par_specialite(double x, double y, char * specialite[], Restaurant 
             while (specialite[k]){
             char *chaine = restaurants[i].specialite;
                 if(strstr(chaine, specialite[k]) != NULL) {
-            results[p]=restaurants[i];
-            printf("%s\n", results[p].nom_restaurant);
-            p++;
+                    int already=0;
+                    for(int r=0; r<=p;r++){
+                        if (results[r].nom_restaurant==restaurants[i].nom_restaurant){
+                            already=1;
+                        }
+                    }
+                    if (already!=1){
+                        results[p]=restaurants[i];
+                        printf("%s\n", results[p].nom_restaurant);
+                        p++;
+                    }
         }
            k++;
         }
