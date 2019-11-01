@@ -7,11 +7,11 @@
 #include <string.h>
 #include <math.h>
 
-int main(){
+nt main(){
     char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
     Restaurant restaurant;
     Restaurant restaurants[TAILLE_MAX];
-    int testing, choix, quit=0, i=0, choix_spec=1;
+    int testing, choix, quit=0, choix_spec=1;
     double x, y, rayon_recherche;
 
     
@@ -34,53 +34,20 @@ int main(){
                 break;
             case 2:
             {
-                char **specialite=malloc(50*sizeof(char*));
-                char * spec = malloc(50*sizeof(char));
-                printf("Quel est le nom du restaurant à ajouter? Taper 0 pour valider\n");
-                char intermediaire[20]="";
-                char elim[50];
-                char *retour = "0";
-                char *test=strstr(intermediaire,retour);
-                while(test==NULL){
-                    scanf("%s", intermediaire);
-                    test=strstr(intermediaire,retour);
-                    if(test==NULL){
-                        strcat(restaurant.nom_restaurant,intermediaire);
-                        strcat(restaurant.nom_restaurant," ");
-                    }
-                }
-                printf("Quelle est l'adresse de ce restaurant? Taper 0 pour valider\n");
-                char intermediaire2[20]="";
-                char *test2=strstr(intermediaire2,retour);
-                while(test2==NULL){
-                    scanf("%s", intermediaire2);
-                    test2=strstr(intermediaire2,retour);
-                    if(test2==NULL){
-                        strcat(restaurant.adresse_restaurant,intermediaire2);
-                        strcat(restaurant.adresse_restaurant," ");
-                    }
-                }
                 viderBuffer();
+                printf("Quel est le nom du restaurant à ajouter?\n");
+                lire(restaurant.nom_restaurant,50);
+                printf("Quelle est l'adresse de ce restaurant?\n");
+                lire(restaurant.adresse_restaurant,50);
                 printf("Quelles sont ses coordonnées géographiques?\nx= ");
                 scanf("%lf", &restaurant.position_restaurant.x);
                 printf("\ny= ");
                 scanf("%lf", &restaurant.position_restaurant.y);
+                viderBuffer();
                 printf("Quelle(s) spécialité(s) propose-t-il?\n");
-                while(choix_spec!=0)
-                {
-                    viderBuffer();
-                    specialite[i]=malloc(50*sizeof(char));
-                    printf("Entrez une spécialité: ");
-                    scanf("%s", spec);
-                    strcpy(specialite[i], spec);
-                    i++;
-                    viderBuffer();
-                    printf("Rajouter une spécialité? 1: oui, 0: non\n");
-                    scanf("%d", &choix_spec);
-                    viderBuffer();
-                }
+                printf("Entrez les spécialités séparées par des parenthèses ");
+                lire(restaurant.specialite,50);
                 inserer_restaurant(restaurant);
-                freeMem(specialite, spec);
                 break;
             }
             case 3:
@@ -108,7 +75,8 @@ int main(){
                 {
                     specialite[position]=malloc(50*sizeof(char));
                     printf("Entrez une spécialité: ");
-                    scanf("%s", spec);
+                    viderBuffer();
+                    lire(spec,50);
                     strcpy(specialite[position], spec);
                     position++;
                     printf("Rajouter une spécialité? 1: oui, 0: non\n");
@@ -119,7 +87,6 @@ int main(){
                 scanf("%lf", &x);
                 printf("\ny= ");
                 scanf("%lf", &y);
-                
                 cherche_par_specialite(x, y, specialite, results);
                 free(specialite);
                 free(spec);
@@ -136,3 +103,4 @@ int main(){
 
     return 0;
 }
+
