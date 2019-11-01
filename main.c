@@ -7,17 +7,13 @@
 #include <string.h>
 #include <math.h>
 
-nt main(){
+int main(){
     char *chemin="/Users/martinboyer/Documents/UTC GI1/SR01/Devoir SR01/ex3.txt";
     Restaurant restaurant;
     Restaurant restaurants[TAILLE_MAX];
     int testing, choix, quit=0, choix_spec=1;
     double x, y, rayon_recherche;
 
-    
-    
-    
-    //testing=test(chemin);
     
     if (testing==1){
         printf("Veuillez nous excuser mais notre service est indisponible pour le moment\n\n\n");
